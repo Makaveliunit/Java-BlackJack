@@ -10,6 +10,8 @@ public class Game_algo {
 		int num_of_hands = n;
 		int dealer_win_count = 0;
 		int player_win_count = 0;
+		int player_dealt_bj = 0;
+		int dealer_dealt_bj = 0;
 		int push_count = 0;
 
 		for (int i = 0; i < num_of_hands; i++) {
@@ -32,16 +34,22 @@ public class Game_algo {
 					
 					//if dealer gets blackjack
 					if (Dealer.getcardvalue() == 21) {
-					   if(player.GetCardValue() != 21)
+					   if(player.GetCardValue() != 21) {
 						   dealer_win_count++;
-					   else
+						   dealer_dealt_bj++;   
+					   }
+					   else {
 						   push_count++;
+						   dealer_dealt_bj++;
+						   player_dealt_bj++; 
+					   }
 						break Main;
 					}
 
 					//if player gets blackjack
-					if (player.GetCardValue() == 21 && Dealer.getcardvalue() != 21) {
+					if (player.GetCardValue() == 21) {
 						player_win_count++;
+						player_dealt_bj++;
 						break Main;
 					}
 
@@ -112,8 +120,10 @@ public class Game_algo {
 			
 
 		}
-        System.out.print("Number of hands played = " + (dealer_win_count + player_win_count + push_count) + "\nDealer win count = " + dealer_win_count + "\nPlayer win count = " + player_win_count + "\nPush count = " + push_count
-        		+"\nHouse Win % = " + (double)dealer_win_count/(double)(dealer_win_count + player_win_count));
+        System.out.print("Number of hands played = " + (dealer_win_count + player_win_count + push_count) + "\nDealer win count = " + 
+		dealer_win_count + "\nPlayer win count = " + player_win_count + "\nPush count = " + push_count
+        		+"\nDealer dealt blackjack = "+ dealer_dealt_bj + "\nPlayer dealt blackjack = " + player_dealt_bj +
+		"\nHouse Win % = " + (double)dealer_win_count/(double)(dealer_win_count + player_win_count));
 	}
 	
 	
